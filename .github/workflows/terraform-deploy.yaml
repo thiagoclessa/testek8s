@@ -16,13 +16,13 @@ jobs:
       ### Configure DO Credentials
       - name: GitHub Action for DigitalOcean - doctl
         uses: digitalocean/action-doctl@v2.3.0
-        
         with:
           token: ${{ secrets.DO_TOKEN }}
-        uses: docker://hashicorp/terraform
+        
+      - name: Terraform Plan
+        uses: docker://hashicorp/terraform:light
         with:
           entrypoint: sh
-      - name: Terraform Plan
         id: plan
         run: |
           terraform init 
