@@ -10,8 +10,6 @@ jobs:
       image: hashicorp/terraform:light
     steps:
       - uses: docker://hashicorp/terraform:light
-        with:
-          entrypoint: sh
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
@@ -25,10 +23,9 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          ls -ltrh
-          ls -ltrh /user/local/bin
-          #terraform init 
-          #terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
+          sh
+          terraform init 
+          terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
       - name: Terraform apply
         run: terraform apply -input=false -no-color -auto-approve plan_cache.json   
