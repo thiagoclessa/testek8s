@@ -21,11 +21,6 @@ jobs:
         uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.DO_TOKEN }}
-      
-      - name: Terraform teste
-      - uses: docker://hashicorp/terraform:light
-        with:
-          entrypoint: terraform init
 
       - name: Terraform Plan
         id: plan
