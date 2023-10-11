@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 2.4.0
+      
       ### Configure DO Credentials
       - name: GitHub Action for DigitalOcean - doctl
         uses: digitalocean/action-doctl@v2.3.0
