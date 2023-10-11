@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "teste_k8s_do"
+  annotations:
+    github.com/project-slug: veecode-homolog/teste_k8s_do
+    backstage.io/techdocs-ref: dir:.
+    github.com/workflows: terraform-deploy.yml,terraform-destroy.yml
+spec:
+  type: devops
+  lifecycle: experimental
+  owner: "group:default/admin"

@@ -1,0 +1,17 @@
+---
+cluster_name: "teste_k8s_do"
+cluster_region: "nyc3"
+cluster_version: "1.27"
+
+###############Default_pool################
+default_pool_size: "s-2vcpu-4gb"
+default_auto_scale: false
+node_count: 1
+tags: ["VKPR", "k8s-digitalocean"]
+
+###############Node_pool################
+node_pool_size: "s-2vcpu-4gb"
+node_auto_scale: true
+min_nodes: 1
+max_nodes: 3
+tags: ["VKPR", "k8s-digitalocean"]
