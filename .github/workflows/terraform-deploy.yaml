@@ -10,6 +10,8 @@ jobs:
       image: hashicorp/terraform:light
     steps:
       - uses: docker://hashicorp/terraform:light
+        with:
+          entrypoint: sh
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
@@ -19,13 +21,18 @@ jobs:
         uses: digitalocean/action-doctl@v2.3.0
         with:
           token: ${{ secrets.DO_TOKEN }}
-        
+      
+      - name: Terraform teste
+      - uses: docker://hashicorp/terraform:light
+        with:
+          entrypoint: terraform init
+
       - name: Terraform Plan
         id: plan
         run: |
           sh
           terraform init 
-          terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
+          #terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
       - name: Terraform apply
         run: terraform apply -input=false -no-color -auto-approve plan_cache.json   
