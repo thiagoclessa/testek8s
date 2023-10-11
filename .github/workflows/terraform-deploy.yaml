@@ -26,7 +26,7 @@ jobs:
         id: plan
         run: |
           ls -ltrh
-          terraform version
+          ls -ltrh /user/local/bin
           #terraform init 
           #terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
