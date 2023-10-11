@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform:light
+      with:
+          entrypoint: /run.sh
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-      - uses: hashicorp/terraform:light
         with:
           entrypoint: /run.sh
       ### Configure DO Credentials
