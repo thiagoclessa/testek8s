@@ -2,11 +2,11 @@ terraform {
   backend "s3" {
     endpoint = "https://nyc3.digitaloceanspaces.com"
     region = "us-east-1"
-    key = "testek8s.tfstate"
+    key = "teste_k8s_do.tfstate"
     bucket = "vkpr-state"
-    skip_requesting_account_id  = true
+    access_key="DO00RMBFWTK82WNF4AHA"
+    secret_key="uQgghONo3IcYzQlU07bQf8zooAMYGu+27HMDYRl/JDQ"
     skip_credentials_validation = true
-    skip_get_ec2_platforms      = true
-    skip_metadata_api_check     = true
+    skip_metadata_api_check = true
   }
 }
