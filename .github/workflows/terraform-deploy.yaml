@@ -6,6 +6,8 @@ on:
 jobs:
   apply:
     runs-on: ubuntu-latest
+    container: 
+        image: hashicorp/terraform:light
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
@@ -17,7 +19,6 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          export do_token=${{ secrets.DO_TOKEN }}
           terraform init -reconfigure
           terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
