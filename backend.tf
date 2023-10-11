@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    endpoint                    = ""https://nyc3.digitaloceanspaces.com""
+    endpoint                    = "https://nyc3.digitaloceanspaces.com"
     key                         = "testek8s.tfstate"
     bucket                      = "vkpr-state"
     region                      = "us-east-1"
