@@ -1,4 +1,4 @@
-name: Deploy Cluster
+name: 00-Deploy Cluster
 
 on:
   workflow_dispatch:
@@ -9,7 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
-    
       ### Configure DO Credentials
       - name: GitHub Action for DigitalOcean - doctl
         uses: digitalocean/action-doctl@v2.3.0
@@ -18,7 +17,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          terraform init
+          terraform init 
           terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
       - name: Terraform apply
