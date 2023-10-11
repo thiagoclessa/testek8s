@@ -9,6 +9,9 @@ jobs:
     container:
       image: hashicorp/terraform:light
     steps:
+      - uses: docker://hashicorp/terraform:light
+        with:
+          entrypoint: sh
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
@@ -20,9 +23,7 @@ jobs:
           token: ${{ secrets.DO_TOKEN }}
         
       - name: Terraform Plan
-        uses: docker://hashicorp/terraform:light
-        with:
-          entrypoint: sh
+        
         id: plan
         run: |
           terraform init 
