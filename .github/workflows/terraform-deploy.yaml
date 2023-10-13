@@ -6,12 +6,7 @@ on:
 jobs:
   apply:
     runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform:latest
     steps:
-      - uses: docker://hashicorp/terraform:latest
-        with:
-          entrypoint: sh
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v2
         with:
