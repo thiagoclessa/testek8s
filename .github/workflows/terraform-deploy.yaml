@@ -24,8 +24,8 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
-          terraform init -reconfigure
-          terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
+          terraform init -input=false
+          terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -input=false -no-color -out plan_cache.json
           
       - name: Terraform apply
         run: terraform apply -input=false -no-color -auto-approve plan_cache.json   
