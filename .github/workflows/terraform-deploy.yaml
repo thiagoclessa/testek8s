@@ -26,7 +26,7 @@ jobs:
 
           
       - name: Terraform apply
-        run: terraform apply -input=false -auto-approve plan_cache.json 
+        run: terraform apply -lock=false -auto-approve plan_cache.json 
         
       - name: Save Terraform state to cache 
         uses: actions/cache@v2
