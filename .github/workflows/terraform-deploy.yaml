@@ -23,11 +23,12 @@ jobs:
         run: |
           terraform init -input=false
           terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -out plan_cache.json -lock=false
+          terraform apply -auto-approve plan_cache.json
           
       - name: Terraform apply
-        run: terraform apply -auto-approve plan_cache.json
+        run: terraform apply -auto-approve plan_cache.json -lock=false
         
-      - name: Save Terraform state to cache
+      - name: Save Terraform state to cache 
         uses: actions/cache@v2
         with:
           path: .terraform
