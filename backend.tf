@@ -1,10 +1,10 @@
 terraform {
   backend "remote" {
     hostname = "app.terraform.io"
-    organization = ""veecode""
+    organization = "veecode"
 
     workspaces {
-      name = ""veecode""
+      name = "veecode"
     }
   }
 }
