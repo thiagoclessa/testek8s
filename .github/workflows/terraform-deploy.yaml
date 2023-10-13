@@ -20,6 +20,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: |
+          export TF_API_TOKEN="${{ secrets.TF_API_TOKEN }}"
           terraform init
           terraform plan -var "do_token=${{ secrets.DO_TOKEN }}" -no-color -out plan_cache.json
           
