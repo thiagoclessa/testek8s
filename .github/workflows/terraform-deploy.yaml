@@ -22,7 +22,7 @@ jobs:
         id: plan
         run: |
           terraform init 
-          terraform plan -var "do_token=${{ secrets.DO_TOKEN }}"
+          terraform plan 
 
           
       - name: Terraform apply
