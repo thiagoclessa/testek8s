@@ -1,9 +1,9 @@
 terraform {
-  cloud {
+  backend "remote" {
     organization = "thiagoclessa"
 
     workspaces {
-      name = "github"
+       name = "github"
     }
   }
   required_providers {
