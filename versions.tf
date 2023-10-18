@@ -3,7 +3,7 @@ terraform {
     organization = "thiagoclessa"
 
     workspaces {
-       name = "github"
+      name = "testek8s"
     }
   }
   required_providers {
