@@ -25,4 +25,6 @@ jobs:
           terraform init
 
       - name: Terraform apply
-        run: terraform apply
+        run: |
+           export do_token="${{ secrets.DO_TOKEN }}"
+           terraform apply 
