@@ -19,6 +19,8 @@ jobs:
           token: "${{ secrets.DO_TOKEN }}"
       - name: Terraform Plan
         id: plan
+        env:
+           TF_DO_TOKEN: "${{ secrets.DO_TOKEN }}"
         run: |
           terraform init 
           terraform plan     
