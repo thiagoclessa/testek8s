@@ -33,4 +33,4 @@ jobs:
         run: terraform init
 
       - name: Terraform destroy
-        run: terraform destroy -lock=false -var "do_token=${{ secrets.DO_TOKEN }}" --auto-approve
+        run: terraform destroy -var "do_token=${{ secrets.DO_TOKEN }}" --auto-approve
