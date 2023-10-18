@@ -21,16 +21,8 @@ jobs:
         with:
           token: ${{ secrets.DO_TOKEN }}
           
-      - name: Restore Terraform state from cache
-        uses: actions/cache@v2
-        with:
-          path: .terraform
-          key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
-          restore-keys: |
-            ${{ runner.os }}-terraform-
-
       - name: Initialize Terraform
         run: terraform init
 
       - name: Terraform destroy
-        run: terraform destroy -var "do_token=${{ secrets.DO_TOKEN }}" --auto-approve
+        run: terraform destroy --auto-approve
