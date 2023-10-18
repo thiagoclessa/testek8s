@@ -1,6 +1,6 @@
 terraform {
   backend "remote" {
-    organization = "teste_platform"
+    organization = "thiagoclessa"
 
     workspaces {
        name = "platform-test"
