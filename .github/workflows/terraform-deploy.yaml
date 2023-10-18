@@ -1,44 +1,45 @@
-name: 00-Deploy Cluster
+name: "Terraform Apply"
 
 on:
-  workflow_dispatch:
-  
-jobs:
-  apply:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-      ### Configure DO Credentials
-      - name: GitHub Action for DigitalOcean - doctl
-        uses: digitalocean/action-doctl@v2.3.0
-        with:
-          token: "${{ secrets.DO_TOKEN }}"
-      - name: Terraform Plan
-        id: plan
-        env:
-           TF_DO_TOKEN: "${{ secrets.DO_TOKEN }}"
-        run: |
-          terraform init 
-          terraform plan     
-      - name: Terraform apply
-        run: terraform apply -auto-approve
-        
-      - name: Save Terraform state to cache 
-        uses: actions/cache@v2
-        with:
-          path: .terraform
-          key: ${{ runner.os }}-terraform-${{ hashFiles('**/*.tf') }}
-          restore-keys: |
-            ${{ runner.os }}-terraform-
+  push:
+    branches:
+      - main
 
-      - name: Kubeconf artefact
-        uses: actions/upload-artifact@v2
+env:
+  TF_CLOUD_ORGANIZATION: "${{ secrets.TF_ORGANIZATION }}"
+  TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
+  TF_WORKSPACE:  "${{ env.TF_WORKSPACE }}"
+  CONFIG_DIRECTORY: "./"
+
+jobs:
+  terraform:
+    if: github.repository != 'hashicorp-education/learn-terraform-github-actions'
+    name: "Terraform Apply"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Upload Configuration
+        uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
+        id: apply-upload
         with:
-          name: kubeconf
-          path: |
-            kube/*
-          retention-days: 1
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ./
+
+      - name: Create Apply Run
+        uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+        id: apply-run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.apply-upload.outputs.configuration_version_id }}
+
+      - name: Apply
+        uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
+        if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
+        id: apply
+        with:
+          run: ${{ steps.apply-run.outputs.run_id }}
+          comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
