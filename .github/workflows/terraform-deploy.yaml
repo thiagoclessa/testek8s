@@ -21,7 +21,9 @@ jobs:
           token: ${{ secrets.DO_TOKEN }}
           
       - name: Initialize Terraform
-        run: terraform init
+        run: | 
+          terraform init
+          terraform plan
 
       - name: Terraform apply
         run: terraform apply --auto-approve
