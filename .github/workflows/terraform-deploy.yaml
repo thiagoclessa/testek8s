@@ -21,10 +21,10 @@ jobs:
           token: ${{ secrets.DO_TOKEN }}
           
       - name: Initialize Terraform
-        run: | 
-          terraform init
+        run:  terraform init
+      
+      - name: Terraform apply
+        run: terraform plan 
 
       - name: Terraform apply
-        run: |
-           export do_token="${{ secrets.DO_TOKEN }}"
-           terraform apply 
+        run: terraform apply -auto-approve
