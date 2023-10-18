@@ -1,5 +1,11 @@
 terraform {
-  required_version = "~> 1.3"
+  cloud {
+    organization = "thiagoclessa"
+
+    workspaces {
+      name = "github"
+    }
+  }
 
   required_providers {
     digitalocean = {
