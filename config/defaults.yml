@@ -1,5 +1,5 @@
 ---
-cluster_name: "teste_k8s_do"
+cluster_name: "testek8sdo"
 cluster_region: "nyc3"
 cluster_version: "1.27"
 
