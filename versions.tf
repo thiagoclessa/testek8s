@@ -1,14 +1,10 @@
-terraform { 
-  backend "remote" {
-    organization = "thiagoclessa"
-    workspaces {
-      name = "testek8s"
-    }
-  }
+terraform {
+  required_version = "~> 1.3"
+
   required_providers {
     digitalocean = {
       source = "digitalocean/digitalocean"
-      version = "2.30.0"
+      version = "~> 2.0"
     }
   }
 }
